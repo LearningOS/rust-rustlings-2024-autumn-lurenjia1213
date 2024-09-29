@@ -18,6 +18,7 @@ fn main() {
     vec1.push(88);
 
     println!("{} has length {}, with contents `{:?}`", "vec1", vec1.len(), vec1);
+    //所有权问题，如果不clone，那么最后vec0的东西就给了vec1，那么就不能通过vec0访问
 }
 
 fn fill_vec(vec: Vec<i32>) -> Vec<i32> {

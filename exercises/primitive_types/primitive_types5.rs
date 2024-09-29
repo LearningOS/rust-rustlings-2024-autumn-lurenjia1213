@@ -9,6 +9,6 @@
 fn main() {
     let cat = ("Furry McFurson", 3.5);
     let /* your pattern here */(name, age) = cat;
-
+    let  b:[i64;100];
     println!("{} is {} years old.", name, age);
 }
