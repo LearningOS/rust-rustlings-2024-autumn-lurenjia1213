@@ -11,12 +11,13 @@
 
 //
 
-pub fn generate_nametag_text(name: String) -> Option<String> {
+pub fn generate_nametag_text(name: String) -> Result<String,String> {
     if name.is_empty() {
         // Empty names aren't allowed.
-        None
+        //None
+        Err("`name` was empty; it must be nonempty.".to_string())
     } else {
-        Some(format!("Hi! My name is {}", name))
+        Ok(format!("Hi! My name is {}", name))
     }
 }
 
@@ -30,7 +31,7 @@ mod tests {
             generate_nametag_text("Beyoncé".into()),
             Ok("Hi! My name is Beyoncé".into())
         );
-    }
+    }//沟槽的，搁着对比呢，眼瞎了
 
     #[test]
     fn explains_why_generating_nametag_text_fails() {

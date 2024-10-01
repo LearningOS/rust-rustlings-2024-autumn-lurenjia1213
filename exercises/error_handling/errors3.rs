@@ -11,11 +11,11 @@
 
 use std::num::ParseIntError;
 
-fn main() {
+fn main() -> Result<(), ParseIntError>{//类型已知
     let mut tokens = 100;
     let pretend_user_input = "8";
 
-    let cost = total_cost(pretend_user_input)?;
+    let cost = total_cost(pretend_user_input)?;//得考虑返回一个Err？已考虑，后面有？
 
     if cost > tokens {
         println!("You can't afford that many!");
@@ -23,6 +23,9 @@ fn main() {
         tokens -= cost;
         println!("You now have {} tokens.", tokens);
     }
+    //程序返回类型得搞清楚
+    //前面total_cost有异常返回，前后一致。。。
+    Ok(())
 }
 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
