@@ -7,7 +7,7 @@
 
 
 fn main() {
-    let a = [0; 100];
+    let a = [1; 100];//搞一个数组，初始值为1，大小为100
 
     if a.len() >= 100 {
         println!("Wow, that's a big array!");

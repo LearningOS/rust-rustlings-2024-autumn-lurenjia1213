@@ -5,7 +5,7 @@
 //
 // Execute `rustlings hint primitive_types2` or use the `hint` watch subcommand
 // for a hint.
-
+//这没啥用，看看就好~
 
 fn main() {
     // Characters (`char`)

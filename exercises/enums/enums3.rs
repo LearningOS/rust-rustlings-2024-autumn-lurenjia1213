@@ -54,7 +54,7 @@ impl State {
             Message::Echo(stri)=>self.echo(stri),
             Message::Move(p)=>self.move_position(p)
         }
-
+/*记得看看options1*/
 
 
 

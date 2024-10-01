@@ -1,3 +1,5 @@
+
+
 fn main() {
     // You can optionally experiment here.
     //assert_eq!(1,1);
@@ -14,4 +16,5 @@ mod tests {
 
         assert_eq!([2, 3], nice_slice);
     }
+    //切片。。。。。这算是一种引用来着
 }

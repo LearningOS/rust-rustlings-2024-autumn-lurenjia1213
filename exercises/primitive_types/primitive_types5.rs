@@ -8,7 +8,7 @@
 
 fn main() {
     let cat = ("Furry McFurson", 3.5);
-    let /* your pattern here */(name, age) = cat;
+    let /* your pattern here */(name, age) = cat;//解构元组
     let  b:[i64;100];
     println!("{} is {} years old.", name, age);
 }

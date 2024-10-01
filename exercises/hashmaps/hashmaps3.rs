@@ -14,7 +14,7 @@
 // Execute `rustlings hint hashmaps3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 use std::collections::HashMap;
 
@@ -28,7 +28,7 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
     // The name of the team is the key and its associated struct is the value.
     let mut scores: HashMap<String, Team> = HashMap::new();
 
-    for r in results.lines() {
+    for r in results.lines() {//大概就是计算一下分数~
         let v: Vec<&str> = r.split(',').collect();
         let team_1_name = v[0].to_string();
         let team_1_score: u8 = v[2].parse().unwrap();
@@ -39,6 +39,24 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // will be the number of goals conceded from team_2, and similarly
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
+        let team_1=scores.entry(team_1_name).or_insert(Team {
+            goals_scored: 0,
+            goals_conceded: 0,
+        });
+        (*team_1).goals_scored+=team_1_score;
+        (*team_1).goals_conceded+=team_2_score;
+        let team_2=scores.entry(team_2_name).or_insert({Team {
+            goals_scored: 0,
+            goals_conceded: 0,
+        }
+        });//
+/*
+team_2_name.clone()与直接使用team_2_name的区别在哪里？
+clone整了一个深引用，所以，这两东西就可以同时用。。。
+直接的用，所有权被转移
+*/
+        (*team_2).goals_scored+=team_2_score;
+        (*team_2).goals_conceded+=team_1_score;
     }
     scores
 }
