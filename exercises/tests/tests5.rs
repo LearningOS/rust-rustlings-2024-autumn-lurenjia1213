@@ -32,7 +32,9 @@ unsafe fn modify_by_address(address: usize) {
     // code's behavior and the contract of this function. You may use the
     // comment of the test below as your format reference.
     unsafe {
-        todo!("Your code goes here")
+        let p =address as *mut u32;//设置指针类型为指向u32的指针（从usize）
+        if !p.is_null(){*p=0xAABBCCDD;}          
+        
     }
 }
 
@@ -45,7 +47,11 @@ mod tests {
         let mut t: u32 = 0x12345678;
         // SAFETY: The address is guaranteed to be valid and contains
         // a unique reference to a `u32` local variable.
-        unsafe { modify_by_address(&mut t as *mut u32 as usize) };
+        unsafe { modify_by_address(&mut t as *mut u32 as usize) };/*
+        &mut t：可变引用
+         as *mut u32转换为可变指针，u32类型
+        as usize:单纯的一个地址
+         */
         assert!(t == 0xAABBCCDD);
     }
 }

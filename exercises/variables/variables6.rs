@@ -4,7 +4,7 @@
 // hint.
 
 
-const NUMBER: i32 = 3;
+const NUMBER: i32 = 3;//不会自动推导类型，这玩意，有点像#define？，可以编译时计算~
 fn main() {
     println!("Number {}", NUMBER);
 }

@@ -7,3 +7,6 @@ You can make them mutable by adding `mut` in front of the variable name.
 ## Further information
 
 - [Variables and Mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html)
+类型 isize，usize：指针宽度
+
+rust返回：可以是一个空元组？？？

@@ -4,10 +4,16 @@
 //
 // Execute `rustlings hint strings1` or use the `hint` watch subcommand for a
 // hint.
+fn cacl_len(s:&str)->usize{
+    s.len()
+}//我去，类型很复杂啊
 
 fn main() {
-    let answer = current_favorite_color();
-    println!("My current favorite color is {}", answer);
+    let answer = current_favorite_color()+" and red";
+    let len=cacl_len(&answer) as i32;//无聊来个类型转换
+    println!("My current favorite color is {},wtf len is {}", answer,len);
+
+    println!("{}",&answer[0..answer.len()-1]);
 }
 
 fn current_favorite_color() -> String {

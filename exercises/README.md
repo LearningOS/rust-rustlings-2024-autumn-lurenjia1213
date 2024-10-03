@@ -16,8 +16,8 @@
 | options                | §10.1               | done
 | error_handling         | §9                  |
 | generics               | §10                 |
-| traits                 | §10.2               |
-| tests                  | §11.1               |
+| traits                 | §10.2               | 111
+| tests                  | §11.1               | 11
 | lifetimes              | §10.3               |
 | iterators              | §13.2-4             |
 | threads                | §16.1-3             |

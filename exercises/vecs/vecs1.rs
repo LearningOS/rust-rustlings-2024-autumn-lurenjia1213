@@ -38,7 +38,17 @@ fn array_and_vec() -> ([i32; 4], Vec<i32>) {
 }
 
 fn main() {
-    // You can optionally experiment here.
+    let mut ve:Vec<u32>=Vec::new();
+    let mut v2array: Vec<Vec<i32>>=Vec::new();
+       // 定义行和列的数量
+       let rows = 3;
+       let cols = 4;
+    for _ in 0..rows {
+        // 创建一行并填充初始值
+        let row = vec![0; cols]; 
+        v2array.push(row); 
+    }
+    
 }
 
 #[cfg(test)]
