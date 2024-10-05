@@ -48,10 +48,40 @@ mod tests {
         // SAFETY: The address is guaranteed to be valid and contains
         // a unique reference to a `u32` local variable.
         unsafe { modify_by_address(&mut t as *mut u32 as usize) };/*
+
         &mut t：可变引用
          as *mut u32转换为可变指针，u32类型
-        as usize:单纯的一个地址
+        as usize:单纯的一个地址，貌似没影响？
          */
         assert!(t == 0xAABBCCDD);
+    }
+}
+fn main() {
+    let array = [10, 20, 30, 40, 50];
+    
+    // 获取数组的指针
+    let ptr = array.as_ptr();
+    
+    // 将指针转换为 usize
+    let address: usize = ptr as usize;
+    
+    // 打印原始地址
+    println!("Original address: {}", address);
+    
+    // 设置偏移量，假设我们要访问数组中的第三个元素
+    let offset = 2 * std::mem::size_of::<i32>(); // 计算偏移量，2 是索引（从 0 开始）
+    
+    // 计算新的地址
+    let new_address = address + offset;
+    
+    // 打印新的地址
+    println!("New address after offset: {}", new_address);
+    
+    // 将新的地址转换回原始指针
+    let new_ptr = new_address as *const i32;
+    
+    // 使用 unsafe 代码块来解引用新的指针
+    unsafe {
+        println!("Value at new address: {}", *new_ptr);
     }
 }

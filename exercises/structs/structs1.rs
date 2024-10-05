@@ -12,11 +12,11 @@ struct ColorClassicStruct {
     red:u8,
     green:u8,
     blue:u8
-}
+}//类似c。。。
 
 struct ColorTupleStruct(u8,u8,u8
 
-);
+);//元组形式
 
 #[derive(Debug)]
 struct UnitLikeStruct;

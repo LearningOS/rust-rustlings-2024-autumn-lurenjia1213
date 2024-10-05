@@ -36,7 +36,12 @@
 
 //
 
-fn main() {}
+fn main() {
+    match std::env::var("HOME") {
+        Ok(gopath) => println!("HOME: {}", gopath),
+        Err(e) => println!("无法读取 HOME: {}", e),
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -48,8 +53,8 @@ mod tests {
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
             .as_secs();
-        let s = std::env::var("TEST_FOO").unwrap();
+        let s = std::env::var("TEST_FOO").unwrap();//获取环境变量
         let e: u64 = s.parse().unwrap();
         assert!(timestamp >= e && timestamp < e + 10);
-    }
+    }//时间范围判断
 }

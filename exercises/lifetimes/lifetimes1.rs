@@ -10,7 +10,7 @@
 
 //
 
-fn longest(x: &str, y: &str) -> &str {
+fn longest<'wtf>(x: &'wtf str, y: &'wtf str) -> &'wtf str {//'wtf 是一个生命周期参数，确保返回的字符串切片的生命周期与输入的字符串切片相同。
     if x.len() > y.len() {
         x
     } else {
