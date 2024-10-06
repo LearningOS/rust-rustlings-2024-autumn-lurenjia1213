@@ -1,14 +1,3 @@
-// threads2.rs
-//
-// Building on the last exercise, we want all of the threads to complete their
-// work but this time the spawned threads need to be in charge of updating a
-// shared value: JobStatus.jobs_completed
-//
-// Execute `rustlings hint threads2` or use the `hint` watch subcommand for a
-// hint.
-
-//
-
 use std::sync::{Arc,Mutex};
 use std::thread;
 use std::time::Duration;
@@ -17,6 +6,11 @@ struct JobStatus {
     jobs_completed: u32,
 }
 fn main() {
+    let words = vec!["Hello", "World", "!"];
+    let result = words.join(" "); // 使用空格作为分隔符 把这堆东西给拼起来
+    println!("{}", result); // 输出: Hello World !
+
+
     let status = Arc::new(Mutex::new(JobStatus { jobs_completed: 0 }));
     let mut handles = vec![];//Vec<std::thread::JoinHandle<()>>
     for _ in 0..10 {

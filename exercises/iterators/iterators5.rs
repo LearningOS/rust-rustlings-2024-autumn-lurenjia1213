@@ -35,26 +35,48 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
-}
+    //todo!();
+    //map.values().filter(|&progress| *progress == value).count()
+    let mut count:usize=0;
+    for val in map.values(){
 
-fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
-    let mut count = 0;
-    for map in collection {
-        for val in map.values() {
-            if val == &value {
-                count += 1;
-            }
+        if val == &value {
+            count += 1;
         }
     }
     count
 }
 
+fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
+    let mut count = 0;
+    for map in collection {
+        /*for val in map.values() {
+            if val == &value {
+                count += 1;
+            }
+
+        }*/
+        /*     遍历哈希表的值        |&progress|：闭包参数，&progress 表示对迭代器中每个元素的引用进行解引用，得到 Progress 类型的值。  随后进行比较与计数                                     */
+        count+=map.values().filter(|&progress| *progress == value).count();
+    }
+    count
+}
+
 fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
-    // collection is a slice of hashmaps.
+    // collection is a slice of hashmaps. 注意，这是一个哈希表集合的切片
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    let mut count = 0;
+    for map in collection {//遍历哈希表集合的切片
+        /*for val in map.values() {//对当前哈希表进行遍历
+            if val == &value {//符合特定状态，计数
+                count += 1;
+            }
+        } */
+
+        count+=map.values().filter(|&progress|*progress ==value).count();
+    }
+    count
 }
 
 #[cfg(test)]
