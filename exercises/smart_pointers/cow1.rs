@@ -37,7 +37,7 @@ mod tests {
         let slice = [-1, 0, 1];
         let mut input = Cow::from(&slice[..]);
         match abs_all(&mut input) {
-            Cow::Owned(_) => Ok(()),
+            Cow::Owned(_) => Ok(()),//搁这检查状态呢,被改了，所以是owned,写时复制
             _ => Err("Expected owned value"),
         }
     }
@@ -49,8 +49,8 @@ mod tests {
         let mut input = Cow::from(&slice[..]);
         match abs_all(&mut input) {
             Cow::Borrowed(_) => Ok(()),
-            _=>Err("unable to borrow")
-
+            _=>Err("should be borrowed,because it doesn't need to be mutated.")
+            
         }
     }
 
@@ -80,3 +80,23 @@ mod tests {
         }
     }
 }
+/*
+use std::borrow::Cow;
+
+fn process_data(data: Cow<str>) {
+    // 处理数据
+    println!("Processing: {}", data);
+}
+
+fn main() {
+    let borrowed: Cow<str> = Cow::Borrowed("Hello, world!");
+    let owned: Cow<str> = Cow::Owned(String::from("Hello, Rust!"));
+
+    process_data(borrowed);
+    process_data(owned);
+}
+代码说明
+Cow::Borrowed：创建一个对字符串字面量的借用。
+Cow::Owned：创建一个拥有 String 的 Cow。
+process_data 函数：接受一个 Cow<str> 类型的参数，可以处理借用或拥有的数据。
+ */
