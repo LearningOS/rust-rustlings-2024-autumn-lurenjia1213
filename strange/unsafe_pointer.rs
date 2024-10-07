@@ -82,6 +82,7 @@ fn main() {
     let new_ptr2 = new_address as *const i32;
     // 使用 unsafe 代码块来解引用新的指针
     unsafe {
+        println!("Value at new address: {}", (*new_ptr)[3]);
         println!("Value at new address: {}", (*new_ptr)[2]);
     }
     unsafe {
