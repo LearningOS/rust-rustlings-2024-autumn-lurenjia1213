@@ -19,12 +19,18 @@ fn maybe_icecream(time_of_day: u16) -> Option<u16> {
         _ =>Some(5) 
     }/*
     wtf 是一个变量名，用于在 match 表达式中捕获 time_of_day 的值。
-    Some(value)，元组结构体，封装了一个 T 类型的值 value
+    
     看看enums.
      */
 
 }
+/*
+enum Option<T> {
+    None,
+    Some(T),
+}
 
+*/
 #[cfg(test)]
 mod tests {
     use super::*;
