@@ -22,14 +22,14 @@
 //
 
 use std::num::ParseIntError;
-
+/* 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
     let qty = item_quantity.parse::<i32>()?;//出错直接在这返回Err
 
     Ok(qty * cost_per_item + processing_fee)
-}/* 
+}*/ 
 pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
@@ -37,7 +37,7 @@ pub fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
         Ok(digit) => Ok(digit * cost_per_item + processing_fee),
         Err(e)=>Err(e)
     }
-}*/
+}
 #[cfg(test)]
 mod tests {
     use super::*;
