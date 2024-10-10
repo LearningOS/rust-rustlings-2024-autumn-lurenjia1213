@@ -7,7 +7,24 @@
 fn cacl_len(s:&str)->usize{
     s.len()
 }//我去，类型很复杂啊
+/*
+fn main() {
+    // 创建一个 String
+    let my_string = String::from("Hello, Rust!");//从rodata的字符串切片，转为string
 
+    // 方法 1: 使用 as_str() 方法
+    let my_str1: &str = my_string.as_str();
+    println!("{}", my_str1);
+
+    // 方法 2: 直接使用引用
+    let my_str2: &str = &my_string;//引用(切片)
+    println!("{}", my_str2);
+}
+
+
+
+
+*/
 fn main() {
     let answer = current_favorite_color()+" and red";
     let len=cacl_len(&answer) as i32;//无聊来个类型转换

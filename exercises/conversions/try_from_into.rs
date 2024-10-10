@@ -41,20 +41,49 @@ enum IntoColorError {
 impl TryFrom<(i16, i16, i16)> for Color {
     type Error = IntoColorError;
     fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
+        let (r,g,b)=tuple;
+        if (r>=01&&r<=255)&&(g>=01&&g<=255)&&(b>=01&&b<=255){
+            return Ok(Color {
+                red: r as u8,
+                green: g as u8,
+                blue: b as u8,
+            });
+        }
+        Err(IntoColorError::IntConversion)
     }
+
 }
 
 // Array implementation
 impl TryFrom<[i16; 3]> for Color {
     type Error = IntoColorError;
     fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
+        let r=arr[0];let g=arr[1];let b=arr[2];
+        if (r>=01&&r<=255)&&(g>=01&&g<=255)&&(b>=01&&b<=255){
+            return Ok(Color {
+                red: r as u8,
+                green: g as u8,
+                blue: b as u8,
+            });
+        }
+        Err(Self::Error::IntConversion)
     }
 }
 
 // Slice implementation
-impl TryFrom<&[i16]> for Color {
+impl TryFrom<&[i16]> for Color {//奇怪的切片
     type Error = IntoColorError;
     fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {
+        if slice.len()!=3{return Err(IntoColorError::BadLen)}
+        let r=slice[0];let g=slice[1];let b=slice[2];
+        if (r>=01&&r<=255)&&(g>=01&&g<=255)&&(b>=01&&b<=255){
+            return Ok(Color {
+                red: r as u8,
+                green: g as u8,
+                blue: b as u8,
+            });
+        }
+        Err(Self::Error::IntConversion)
     }
 }
 

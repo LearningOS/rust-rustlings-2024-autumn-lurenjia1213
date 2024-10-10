@@ -10,7 +10,7 @@
 //
 // Execute `rustlings hint rc1` or use the `hint` watch subcommand for a hint.
 
-//
+//引用计数
 
 use std::rc::Rc;
 

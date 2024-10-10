@@ -18,4 +18,5 @@ fn main() {
 
 fn is_a_color_word(attempt: &str) -> bool {
     attempt == "green" || attempt == "blue" || attempt == "red"
-}//rodata地址？？？
+    
+}//rodata地址？？？//这就很有意思。。。对比地址吗？
