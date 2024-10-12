@@ -2,7 +2,7 @@
 	single linked list merge
 	This problem requires you to merge two ordered singly linked lists into one ordered singly linked list
 */
-//
+//合并单链表
 
 use std::fmt::{self, Display, Formatter};
 use std::ptr::NonNull;
@@ -29,13 +29,16 @@ struct LinkedList<T> {
     end: Option<NonNull<Node<T>>>,
 }
 
-impl<T> Default for LinkedList<T> {
+impl<T> Default for LinkedList<T> 
+where T: PartialOrd+Clone,{//实现PartialOrd+Clone
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<T> LinkedList<T> {
+impl<T> LinkedList<T> 
+where
+T: PartialOrd+Clone,{
     pub fn new() -> Self {
         Self {
             length: 0,
@@ -70,14 +73,46 @@ impl<T> LinkedList<T> {
         }
     }
 	pub fn merge(list_a:LinkedList<T>,list_b:LinkedList<T>) -> Self
+        where T:PartialOrd+ PartialEq,
 	{
-		//TODO
-		Self {
-            length: 0,
-            start: None,
-            end: None,
+		/*
+        struct LinkedList<T> {
+        length: u32,
+        start: Option<NonNull<Node<T>>>,
+        end: Option<NonNull<Node<T>>>,
+    }
+         */
+		let mut ptr_a=list_a.start;
+        let mut ptr_b=list_b.start;
+        let mut merged=Self::new();
+        while ptr_a.is_some()&&ptr_b.is_some(){
+            let a_val = unsafe { &(*ptr_a.unwrap().as_ptr()).val };
+            let b_val = unsafe { &(*ptr_b.unwrap().as_ptr()).val };//unsafe { b_ptr.unwrap().as_ref() };
+            if a_val<b_val{
+                merged.add(a_val.clone());
+                ptr_a=unsafe{(*ptr_a.unwrap().as_ptr()).next}
+            }else{
+                merged.add(b_val.clone());
+                ptr_b=unsafe{(*ptr_b.unwrap().as_ptr()).next}
+            } 
+        }//咋说呢，相同长度
+/*******************************************************************************************/
+        //接下来，考虑多出来的部分
+        while ptr_a.is_some(){
+            let a_val = unsafe { &(*ptr_a.unwrap().as_ptr()).val };
+            merged.add(a_val.clone());
+            ptr_a=unsafe{(*ptr_a.unwrap().as_ptr()).next};
         }
+        while ptr_b.is_some(){
+            let b_val = unsafe { &(*ptr_b.unwrap().as_ptr()).val };
+            merged.add(b_val.clone());
+            ptr_b=unsafe{(*ptr_b.unwrap().as_ptr()).next};
+        }
+        merged
+
 	}
+
+
 }
 
 impl<T> Display for LinkedList<T>
@@ -94,7 +129,7 @@ where
 
 impl<T> Display for Node<T>
 where
-    T: Display,
+    T: Display,/*在 Rust 中，where T: Display 是一个约束，表示类型 T 必须实现 Display trait。这意味着你可以在 fmt 方法中安全地使用 T 的 Display 实现来格式化输出。 */
 {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         match self.next {
@@ -129,7 +164,7 @@ mod tests {
     }
 
     #[test]
-    fn test_merge_linked_list_1() {
+    fn test_merge_linked_list_1() { //实现这个
 		let mut list_a = LinkedList::<i32>::new();
 		let mut list_b = LinkedList::<i32>::new();
 		let vec_a = vec![1,3,5,7];

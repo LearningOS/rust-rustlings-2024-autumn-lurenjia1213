@@ -19,8 +19,8 @@ impl<T> Node<T> {
     fn new(t: T) -> Node<T> {
         Node {
             val: t,
-            prev: None,
-            next: None,
+            prev: None,//后
+            next: None,//前
         }
     }
 }
@@ -73,7 +73,14 @@ impl<T> LinkedList<T> {
         }
     }
 	pub fn reverse(&mut self){
-		// TODO
+		let mut current=self.start;
+        while  let Some(mut nptr)=current{
+            let mut node=unsafe{ nptr.as_mut()};
+            current=node.next;//保存目标
+            std::mem::swap(&mut node.prev,&mut node.next);
+        }
+        std::mem::swap(&mut self.start,&mut self.end)
+
 	}
 }
 
@@ -134,7 +141,7 @@ mod tests {
 			list.add(original_vec[i]);
 		}
 		println!("Linked List is {}", list);
-		list.reverse();
+		list.reverse();//倒过来
 		println!("Reversed Linked List is {}", list);
 		for i in 0..original_vec.len(){
 			assert_eq!(reverse_vec[i],*list.get(i as i32).unwrap());
