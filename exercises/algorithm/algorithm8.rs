@@ -1,8 +1,8 @@
 /*
 	queue
-	This question requires you to use queues to implement the functionality of the stac
+	This question requires you to use queues to implement the functionality of the stack
 */
-//
+//6的，利用队列实现stack
 
 #[derive(Debug)]
 pub struct Queue<T> {
@@ -54,28 +54,51 @@ impl<T> Default for Queue<T> {
 
 pub struct myStack<T>
 {
-	//TODO
+	
 	q1:Queue<T>,
 	q2:Queue<T>
 }
 impl<T> myStack<T> {
     pub fn new() -> Self {
         Self {
-			//TODO
+			
 			q1:Queue::<T>::new(),
 			q2:Queue::<T>::new()
         }
     }
     pub fn push(&mut self, elem: T) {
-        //TODO
+        self.q1.enqueue(elem);
     }
     pub fn pop(&mut self) -> Result<T, &str> {
-        //TODO
-		Err("Stack is empty")
+        
+		match self.q1.is_empty(){
+            true=>{return Err("Stack is empty");},
+            false=>{/*非空，做点什么？单向队列，，求末尾。。。，，其他地方需要不变。。。
+                    q2就是用来干这事的。。。
+                    */
+
+                     
+                    for _ in 1..self.q1.size(){
+                        //遍历q1
+                        self.q2.enqueue(self.q1.dequeue().unwrap());
+                        //如果出队列后，容量为1，那么就停止
+                        
+                    }
+                    let ret=self.q1.dequeue().unwrap();
+                    for _ in 0..self.q2.size(){
+                        //遍历q1
+                        self.q1.enqueue(self.q2.dequeue().unwrap());
+                        //如果出队列后，容量为1，那么就停止
+                        
+                    }
+                    return Ok(ret);
+            }
+        }
+        
     }
     pub fn is_empty(&self) -> bool {
 		//TODO
-        true
+        self.q1.is_empty()
     }
 }
 

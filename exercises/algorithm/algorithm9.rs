@@ -2,8 +2,8 @@
 	heap
 	This question requires you to implement a binary heap function
 */
-//
-
+//悲，数据结构没好好学
+//可能和前面的东西有点像
 use std::cmp::Ord;
 use std::default::Default;
 
