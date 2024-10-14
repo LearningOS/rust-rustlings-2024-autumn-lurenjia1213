@@ -1,6 +1,6 @@
 /*
 	graph
-	This problem requires you to implement a basic graph functio
+	This problem requires you to implement a basic graph function
 */
 //
 
@@ -14,7 +14,7 @@ impl fmt::Display for NodeNotInGraph {
     }
 }
 pub struct UndirectedGraph {
-    adjacency_table: HashMap<String, Vec<(String, i32)>>,
+    adjacency_table: HashMap<String, Vec<(String, i32)>>,//我从来没见过这么奇怪的操作，用哈希表来当邻接表
 }
 impl Graph for UndirectedGraph {
     fn new() -> UndirectedGraph {
@@ -28,20 +28,28 @@ impl Graph for UndirectedGraph {
     fn adjacency_table(&self) -> &HashMap<String, Vec<(String, i32)>> {
         &self.adjacency_table
     }
-    fn add_edge(&mut self, edge: (&str, &str, i32)) {
-        //TODO
-    }
 }
 pub trait Graph {
     fn new() -> Self;
     fn adjacency_table_mutable(&mut self) -> &mut HashMap<String, Vec<(String, i32)>>;
     fn adjacency_table(&self) -> &HashMap<String, Vec<(String, i32)>>;
     fn add_node(&mut self, node: &str) -> bool {
-        //TODO
-		true
+        let mut adjacency_table = self.adjacency_table_mutable();
+        if adjacency_table.contains_key(node) {
+            return false;
+        }
+        adjacency_table.insert(node.to_string(), Vec::new());//HashMap<String, Vec<(String, i32)>>  vec是这个节点连着其他节点与路径长度
+        return true;
     }
     fn add_edge(&mut self, edge: (&str, &str, i32)) {
-        //TODO
+        let (from, to, cost) = edge;
+        self.add_node(from);
+        self.add_node(to);//加一下节点~
+        let mut adjacency_table = self.adjacency_table_mutable();
+        //接下来加一下cost
+        /*Returns a mutable reference to the value corresponding to the key. */
+        adjacency_table.get_mut(to).unwrap().push((from.to_string(),cost));//<to,vec<from,cost>>
+        adjacency_table.get_mut(from).unwrap().push((to.to_string(),cost));//push的是元组。。。
     }
     fn contains(&self, node: &str) -> bool {
         self.adjacency_table().get(node).is_some()
